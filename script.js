@@ -4,31 +4,49 @@ const employeesArray = [];
 // Collect employee data
 const collectEmployees = function() {
   // TODO: Get user input to create and return an array of employee objects
-    let employees = [];
-    let addAnother = true;
+    let addAnother;
 
   do {
     let employeeFirstName = prompt("Enter first name:");
     let employeeLastName = prompt("Enter last name:");
     let salary = prompt("Enter salary");
-    if (isNaN(salary)) {
-        salary = 0;
-    } 
+    if (isNaN(salary) || salary === '') {
+      salary = 0;
+    } else {
+      salary = parseFloat(salary);
+    }
     let newEmployee = {
         firstName: employeeFirstName,
         lastName: employeeLastName,
         salary: salary,
       }
-      employees.push(newEmployee);
-      addAnother = prompt("Would you like to add another employee?");
+      employeesArray.push(newEmployee);
+      addAnother = confirm("Would you like to add another employee?");
   } while (addAnother);
-  return employees;
+
+  return employeesArray;
 }
 
 // Display the average salary
 const displayAverageSalary = function(employeesArray) {
   // TODO: Calculate and display the average salary
-    console.log(employeesArray);
+  if (employeesArray.length === 0) {
+    console.log("No employees to calculate average salary.");
+    return;
+  }
+
+  let totalSalary = employeesArray.reduce((acc, employee) => acc + employee.salary, 0);
+  let averageSalary = totalSalary / employeesArray.length;
+
+  let averageSalaryNoDecimals = Math.round(averageSalary);
+  let averageSalaryWithTwoDecimals = averageSalary.toFixed(2);
+
+  let numberOfEmployees = employeesArray.length;
+
+  console.log(`The average employee salary between our ${numberOfEmployees} employee(s) is $${averageSalaryNoDecimals}.`);
+  console.log(`The average employee salary between our ${numberOfEmployees} employee(s) is $${averageSalaryWithTwoDecimals}.`);
+
+  return averageSalary;
 }
 // Get a reference to the #add-employees-btn element
 
