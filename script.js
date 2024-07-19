@@ -11,10 +11,10 @@ const collectEmployees = function() {
     let employeeLastName = prompt("Enter last name:");
     let salary = prompt("Enter salary");
     if (isNaN(salary) || salary === '') {
-      salary = 0;
+        salary = 0;
     } else {
       salary = parseFloat(salary);
-    }
+    } 
     let newEmployee = {
         firstName: employeeFirstName,
         lastName: employeeLastName,
@@ -53,6 +53,18 @@ const displayAverageSalary = function(employeesArray) {
 // Select a random employee
 const getRandomEmployee = function(employeesArray) {
   // TODO: Select and display a random employee
+  if (employeesArray.length === 0) {
+    console.log("No employees to select.");
+    return;
+  }
+
+  let randomIndex = Math.floor(Math.random() * employeesArray.length);
+
+  // Get the random employee
+  let randomEmployee = employeesArray[randomIndex];
+
+  // Display the random employee
+  console.log(`Congratulations to ${randomEmployee.firstName} ${randomEmployee.lastName}, our random drawing winner!`);
 }
 
 /*
